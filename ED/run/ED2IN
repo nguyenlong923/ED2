@@ -950,6 +950,8 @@ $ED_NL
    !                           Christofferson et al. 2016 GMD                              !
    !                        2. Track plant hydrodynamics using parameters from             !
    !                           Xu et al. 2016 New Phytologist                              !
+   !                        3. Same as 1 but track lianas hydrodynamics using parameters   !
+   !                           from CAVElab                                                !
    !                       -1. Same as 1 but leaf/wood heat capacity does not change       !
    !                       -2. Same as 2 but leaf/wood heat capacity does not change       !
    !---------------------------------------------------------------------------------------!

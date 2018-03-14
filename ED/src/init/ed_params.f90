@@ -3536,6 +3536,53 @@ subroutine init_pft_hydro_params()
 
    end select
 
+
+
+   ! overwrite some parameters of Lianas if PLANT_HYDRO_SCHEME is 3
+   ! Using meta-analysis from CAVElab
+   select case (plant_hydro_scheme)
+   case(3)
+      do ipft = 17
+
+         !----------------------------------------------------------!
+         !  Capacitance is estimated from Scholz et al. 2011        !
+         !  Since the capacitance is treated as a constant in the   !
+         !  model, it should be way smaller than lab/field measured !
+         !  capacitance [Sack et al. 2003 PCE;Steppe et al. 2006    !
+         !  Tree Physiology]. Thus, here Cap_leaf is multiplied by  !
+         !  1/2 and Cap_stem is multipled by 1/3                    !
+         !                                                          !
+         !  Scholz, F. G., N. G. Phillips, et al. (2011). Hydraulic !
+         !  Capacitance: Biophysics and Functional Significance of  !
+         !  Internal Water Sources in Relation to Tree Size.        !
+         !----------------------------------------------------------!
+         leaf_water_cap(ipft) = 3.e-3 * SLA(ipft) / C2B / MPa2m / 2.
+         wood_water_cap(ipft) = min(400.,max(50.,                         &
+                                -700. * (rho(ipft) - 0.3) + 400.))        &
+                                / (rho(ipft) * 1.e3) / MPa2m / 3.
+
+         ! Copied from wat_dry_ratio_grn and wat_dry_ratio_ngrn
+         leaf_water_sat(ipft) = 1.85
+         wood_water_sat(ipft) = 0.7
+
+         ! Set some rwc_min so that psi_min makes sense
+         leaf_rwc_min(ipft) = 0.5
+         wood_rwc_min(ipft) = 0.05
+
+
+         leaf_psi_tlp(ipft)   = (-0.756 - 1.41 * rho(ipft)) * MPa2m
+         wood_psi50(ipft)     = (0.32 - 3.28 * rho(ipft)) * MPa2m
+         wood_Kmax(ipft)      = 10**(1.88 - 1.95 * rho(ipft)) / MPa2m
+         wood_Kexp(ipft)      = 4.
+
+      enddo
+
+
+
+   end select
+
+
+
    ! Equivalent leaf/wood minimum water potential calculated from leaf_rwc
    ! with the assumption of constant capacitance [m]
    do ipft = 1, n_pft
