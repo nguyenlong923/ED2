@@ -1643,7 +1643,7 @@ end do
 
    if (plant_hydro_scheme < -2 .or. plant_hydro_scheme > 3) then
       write (reason,fmt='(a,1x,i4,a)')                                                     &
-                    'Invalid PLANT_HYDRO_SCHEME, it must be between -2 and 2. Yours is set to'   &
+                    'Invalid PLANT_HYDRO_SCHEME, it must be between -2 and 3. Yours is set to'   &
                     ,plant_hydro_scheme,'...'
       call opspec_fatal(reason,'opspec_misc')
       ifaterr = ifaterr +1

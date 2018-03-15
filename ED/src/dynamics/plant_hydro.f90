@@ -87,7 +87,7 @@ module plant_hydro
             cpatch%leaf_psi        (ico)    = 0.
             cpatch%wood_psi        (ico)    = 0.
         enddo
-      case (-2,-1,1,2)
+      case (-2,-1,1,2,3)
         ! track plant hydraulics
 
         !--------------------------------------------------------------------------
