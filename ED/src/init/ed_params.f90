@@ -3549,10 +3549,10 @@ subroutine init_pft_hydro_params()
          wood_rwc_min(17) = 0.05
 
 
-         leaf_psi_tlp(17)   = (-0.756 - 1.41 * rho(17)) * MPa2m
-         wood_psi50(17)     = (0.32 - 3.28 * rho(17)) * MPa2m
-         wood_Kmax(17)      = 10**(1.88 - 1.95 * rho(17)) / MPa2m
-         wood_Kexp(17)      = 4.
+         leaf_psi_tlp(17)   = -exp(0.708 + 0.461 * log(rho(17))) * MPa2m
+         wood_psi50(17)     = -exp(0.983 + 1.18 * log(rho(17))) * MPa2m
+         wood_Kmax(17)      = exp(5.18 - 5.49 * rho(17)) / MPa2m
+         wood_Kexp(17)      = 0.544 * 4. * (-wood_psi50(17) / MPa2m) ** (-0.17)
 
 
 
